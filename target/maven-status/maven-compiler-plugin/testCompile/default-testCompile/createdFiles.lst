@@ -1,0 +1,5 @@
+org\test\web\ApplicationConfig4Test.class
+org\test\web\repo\UserRepositoryTest.class
+org\test\web\utest\TestCase.class
+org\test\web\GreetingControllerTest.class
+org\test\web\GreetingControllerTest2.class
