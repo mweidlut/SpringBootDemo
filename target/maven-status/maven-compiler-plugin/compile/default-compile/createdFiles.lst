@@ -1,6 +1,0 @@
-org\test\web\domain\User.class
-org\test\web\aop\UserDefinedAOP.class
-org\test\web\JerseyConfig.class
-org\test\web\GreetingRestController.class
-org\test\web\repo\UserRepository.class
-Application.class
