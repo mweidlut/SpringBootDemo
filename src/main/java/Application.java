@@ -24,7 +24,7 @@ public class Application {
     //1. jpa --
     //2. restful --
     //3. profile --
-    //4. aop
+    //4. aop   --
     //5. test --
 
 }

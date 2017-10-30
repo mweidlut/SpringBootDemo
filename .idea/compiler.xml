@@ -6,13 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-boot-and-clound-demo" />
-        <module name="spring-boot-demo" />
+        <module name="spring-boot-and-cloud-demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="spring-boot-and-clound-demo" target="1.8" />
-      <module name="spring-boot-demo" target="1.8" />
+      <module name="spring-boot-and-cloud-demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

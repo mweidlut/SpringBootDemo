@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/spring-boot-and-clound-demo.iml" filepath="$PROJECT_DIR$/spring-boot-and-clound-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-and-cloud-demo.iml" filepath="$PROJECT_DIR$/spring-boot-and-cloud-demo.iml" />
     </modules>
   </component>
 </project>

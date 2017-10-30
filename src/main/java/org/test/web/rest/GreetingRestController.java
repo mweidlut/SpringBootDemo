@@ -1,7 +1,8 @@
-package org.test.web;
+package org.test.web.rest;
 
 import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
+import org.test.web.annotation.CheckMethod;
 import org.test.web.domain.User;
 
 import javax.ws.rs.GET;
@@ -22,6 +23,7 @@ public class GreetingRestController {
     @GET
     @Path("/user")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @CheckMethod
     public String user(){
         User user = new User();
         user.setName("anna");

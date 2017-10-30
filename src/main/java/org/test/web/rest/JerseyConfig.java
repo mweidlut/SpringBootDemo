@@ -1,4 +1,4 @@
-package org.test.web;
+package org.test.web.rest;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.internal.scanning.PackageNamesScanner;
