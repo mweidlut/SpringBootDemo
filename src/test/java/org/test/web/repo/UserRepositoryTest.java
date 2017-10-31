@@ -37,7 +37,7 @@ public class UserRepositoryTest {
 
         User saved = userRepository.findOne(user.getId());
 
-        logger.info("find user {} by id {}, whose birthday is {}", saved.getName(), saved.getId(), user.getBirthday());
+        logger.info("find user {} ", saved);
     }
 
 }

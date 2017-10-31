@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Table(name = "USER")
 @Entity
@@ -25,6 +28,17 @@ public class User implements Serializable {
 
     @Column
     private LocalDate birthday;
+
+    @Column
+    private LocalDateTime createTime = LocalDateTime.now();
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
 
     public LocalDate getBirthday() {
         return birthday;
@@ -48,5 +62,15 @@ public class User implements Serializable {
 
     private void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", createTime=" + createTime +
+                '}';
     }
 }
