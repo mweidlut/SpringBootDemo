@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.test.web.ApplicationConfig4Test;
 import org.test.web.domain.User;
 
+import java.time.LocalDate;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(ApplicationConfig4Test.class)
@@ -29,13 +31,13 @@ public class UserRepositoryTest {
     public void testFind() {
         User user = new User();
         user.setName("mike");
+        user.setBirthday(LocalDate.now());
 
         userRepository.save(user);
 
         User saved = userRepository.findOne(user.getId());
 
-
-        logger.info("find user {} by id {}", saved.getName(), saved.getId());
+        logger.info("find user {} by id {}, whose birthday is {}", saved.getName(), saved.getId(), user.getBirthday());
     }
 
 }
