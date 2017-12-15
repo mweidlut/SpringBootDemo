@@ -27,5 +27,4 @@ public class BootStrapApplication {
         return new ProtobufHttpMessageConverter();
     }
 
-
 }
