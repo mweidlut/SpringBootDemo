@@ -14,6 +14,7 @@ import org.test.web.ApplicationConfig4Test;
 import org.test.web.domain.User;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
@@ -32,13 +33,17 @@ public class UserRepositoryTest {
     public void testFind() {
         User user = new User();
         user.setName("mike");
-        user.setBirthday(LocalDate.now());
+        //user.setBirthday(LocalDate.now());
 
         userRepository.save(user);
 
         User saved = userRepository.findOne(user.getId());
 
+        List<User> users = userRepository.findByNameNot("mi");
+        users.remove(0);
+
         logger.info("find user {} ", saved);
+        logger.info("find users {} ", users);
     }
 
 }

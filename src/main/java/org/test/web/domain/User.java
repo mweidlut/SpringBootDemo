@@ -12,10 +12,13 @@ import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Table(name = "USER")
 @Entity
-public class User implements Serializable {
+public class User extends AbstractUser implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -31,6 +34,29 @@ public class User implements Serializable {
 
     @Column
     private LocalDateTime createTime = LocalDateTime.now();
+
+    private List<User> child = new ArrayList<>();
+
+    public User(){}
+
+    public User(String name, String sex, LocalDate birthday){
+        this.name = name;
+        super.setSex(sex);
+        this.birthday = birthday;
+    }
+
+    public User children(User... children){
+        this.child.addAll(Arrays.asList(children));
+        return this;
+    }
+
+    public List<User> getChild() {
+        return child;
+    }
+
+    public void setChild(List<User> child) {
+        this.child = child;
+    }
 
     public LocalDateTime getCreateTime() {
         return createTime;
@@ -71,6 +97,6 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", birthday=" + birthday +
                 ", createTime=" + createTime +
-                '}';
+                "} " + super.toString();
     }
 }
