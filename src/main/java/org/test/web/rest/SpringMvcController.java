@@ -14,22 +14,21 @@ import org.test.web.repo.CustomerRepository;
  * User: weimeng
  * Date: 2017/12/15 18:01
  */
-@RestController("/app")
-public class SpringMVCController {
+@RestController
+public class SpringMvcController {
 
-    private static Logger logger = LoggerFactory.getLogger(SpringMVCController.class);
+    private static Logger logger = LoggerFactory.getLogger(SpringMvcController.class);
 
     @Autowired
     private CustomerRepository customerRepository;
 
-    @RequestMapping(value = "/customers2/{id}", method = RequestMethod.GET)
-    public CustomerProtos.Customer customer(@PathVariable Integer id) {
+    @RequestMapping(value = "/app2/customers2/{id}", method = RequestMethod.GET)
+    public CustomerProtos.Customer customer(@PathVariable("id") Integer id) {
         CustomerProtos.Customer customer = customerRepository.findById(id);
 
         logger.info("customers2 ...");
 
         return customer;
-
     }
 
 }

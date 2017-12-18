@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
 public class JerseyConfig extends ResourceConfig {
 
     public JerseyConfig() {
-//        register(GreetingController.class);
-
+        //register(GreetingController.class);
         registerFinder(new PackageNamesScanner(new String[]{"org.test"}, true));
     }
 
