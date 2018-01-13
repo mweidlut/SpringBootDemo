@@ -6,9 +6,9 @@ option java_package = "org.test.web.protobuf";
 option java_outer_classname = "CustomerProtos";
 
 message Customer {
-     int32 id = 1;
-     string firstName = 2;
-     string lastName = 3;
+    int32 id = 1;
+    string firstName = 2;
+    string lastName = 3;
 
     enum EmailType {
         PRIVATE = 0;
@@ -16,14 +16,14 @@ message Customer {
     }
 
     message EmailAddress {
-         string email = 1;
-         EmailType type = 2;
+        string email = 1;
+        EmailType type = 2;
     }
 
     repeated EmailAddress email = 5;
 }
 
 message Organization {
-     string name = 1;
+    string name = 1;
     repeated Customer customer = 2;
 }
