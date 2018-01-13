@@ -21,8 +21,8 @@ public class BezierCurve extends JPanel implements MouseListener, MouseMotionLis
 
     private Point2D[] controlPoint;
     private Ellipse2D.Double[] ellipse;
-    private int numPoints;
-    private double t = 0.002;
+    private int numPoints; //点的个数
+    private double delta = 0.002;
 
     public BezierCurve() {
         numPoints = 0;
@@ -33,20 +33,22 @@ public class BezierCurve extends JPanel implements MouseListener, MouseMotionLis
     }
 
     public static void main(String[] agrs) {
-        JFrame f = new JFrame();
-        BezierCurve t2 = new BezierCurve();
-        f.add(t2);
-        f.pack();
-        f.setVisible(true);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame();
+        BezierCurve bezierCurve = new BezierCurve();
+        frame.add(bezierCurve);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
+
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.MAGENTA);
+
         for (int i = 0; i < numPoints; i++) {
             if (i > 0 && i < (numPoints - 1)) {
                 g2.fill(ellipse[i]);
@@ -56,10 +58,11 @@ public class BezierCurve extends JPanel implements MouseListener, MouseMotionLis
             if (numPoints > 1 && i < (numPoints - 1))
                 g2.drawLine((int) controlPoint[i].getX(), (int) controlPoint[i].getY(), (int) controlPoint[i + 1].getX(), (int) controlPoint[i + 1].getY());
         }
+
         if (numPoints == 4) {
             double x, y;
             g2.setColor(Color.RED);
-            for (double k = t; k <= 1 + t; k += t) {
+            for (double k = delta; k <= 1 + delta; k += delta) {
                 x = (1 - k) * (1 - k) * (1 - k) * controlPoint[0].getX() + 3 * k * (1 - k) * (1 - k) * controlPoint[1].getX()
                         + 3 * k * k * (1 - k) * controlPoint[2].getX() + k * k * k * controlPoint[3].getX();
                 y = (1 - k) * (1 - k) * (1 - k) * controlPoint[0].getY() + 3 * k * (1 - k) * (1 - k) * controlPoint[1].getY()
