@@ -21,20 +21,22 @@ public class BezierCurve extends JPanel implements MouseListener, MouseMotionLis
 
     private Point2D[] controlPoint;
     private Ellipse2D.Double[] ellipse;
-    private int numPoints; //点的个数
+    private int countOfPoint;
     private double delta = 0.002;
 
     public BezierCurve() {
-        numPoints = 0;
+        countOfPoint = 0;
         controlPoint = new Point2D[4];
         ellipse = new Ellipse2D.Double[4];
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
     }
 
+    //main
     public static void main(String[] agrs) {
-        JFrame frame = new JFrame();
         BezierCurve bezierCurve = new BezierCurve();
+
+        JFrame frame = new JFrame();
         frame.add(bezierCurve);
         frame.pack();
         frame.setVisible(true);
@@ -46,29 +48,37 @@ public class BezierCurve extends JPanel implements MouseListener, MouseMotionLis
 
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.MAGENTA);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.MAGENTA);
 
-        for (int i = 0; i < numPoints; i++) {
-            if (i > 0 && i < (numPoints - 1)) {
-                g2.fill(ellipse[i]);
+        for (int i = 0; i < countOfPoint; i++) {
+            if (i > 0 && i < (countOfPoint - 1)) {
+                g2d.fill(ellipse[i]);
             } else {
-                g2.draw(ellipse[i]);
+                g2d.draw(ellipse[i]);
             }
-            if (numPoints > 1 && i < (numPoints - 1))
-                g2.drawLine((int) controlPoint[i].getX(), (int) controlPoint[i].getY(), (int) controlPoint[i + 1].getX(), (int) controlPoint[i + 1].getY());
+            if (countOfPoint > 1 && i < (countOfPoint - 1))
+                g2d.drawLine((int) controlPoint[i].getX(), (int) controlPoint[i].getY(), (int) controlPoint[i + 1].getX(), (int) controlPoint[i + 1].getY());
         }
 
-        if (numPoints == 4) {
-            double x, y;
-            g2.setColor(Color.RED);
-            for (double k = delta; k <= 1 + delta; k += delta) {
-                x = (1 - k) * (1 - k) * (1 - k) * controlPoint[0].getX() + 3 * k * (1 - k) * (1 - k) * controlPoint[1].getX()
-                        + 3 * k * k * (1 - k) * controlPoint[2].getX() + k * k * k * controlPoint[3].getX();
-                y = (1 - k) * (1 - k) * (1 - k) * controlPoint[0].getY() + 3 * k * (1 - k) * (1 - k) * controlPoint[1].getY()
-                        + 3 * k * k * (1 - k) * controlPoint[2].getY() + k * k * k * controlPoint[3].getY();
+        if (countOfPoint == 4) {
+            g2d.setColor(Color.RED);
 
-                g2.drawLine((int) x, (int) y, (int) x, (int) y);
+            double x, y;
+            for (double k = delta; k <= 1 + delta; k += delta) {
+                //x
+                x = (1 - k) * (1 - k) * (1 - k) * controlPoint[0].getX()
+                        + 3 * k * (1 - k) * (1 - k) * controlPoint[1].getX()
+                        + 3 * k * k * (1 - k) * controlPoint[2].getX()
+                        + k * k * k * controlPoint[3].getX();
+
+                //y
+                y = (1 - k) * (1 - k) * (1 - k) * controlPoint[0].getY()
+                        + 3 * k * (1 - k) * (1 - k) * controlPoint[1].getY()
+                        + 3 * k * k * (1 - k) * controlPoint[2].getY()
+                        + k * k * k * controlPoint[3].getY();
+
+                g2d.drawLine((int) x, (int) y, (int) x, (int) y);
             }
         }
     }
@@ -82,26 +92,36 @@ public class BezierCurve extends JPanel implements MouseListener, MouseMotionLis
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        if (numPoints < 4) {
+        if (countOfPoint < 4) {
             double x = e.getX();
             double y = e.getY();
-            controlPoint[numPoints] = new Point2D.Double(x, y);
+            controlPoint[countOfPoint] = new Point2D.Double(x, y);
             Ellipse2D.Double current = new Ellipse2D.Double(x - SIDE_LENGTH / 2, y - SIDE_LENGTH / 2, SIDE_LENGTH, SIDE_LENGTH);
-            ellipse[numPoints] = current;
+            ellipse[countOfPoint] = current;
 
-            numPoints++;
+            countOfPoint++;
             repaint();
         }
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mouseDragged(MouseEvent e) {
 
+        int flag = find(e.getPoint());
+        if (flag < 5) {
+            double x = e.getX();
+            double y = e.getY();
+            controlPoint[flag] = new Point2D.Double(x, y);
+            Ellipse2D.Double current = new Ellipse2D.Double(x - SIDE_LENGTH / 2, y - SIDE_LENGTH / 2, SIDE_LENGTH, SIDE_LENGTH);
+            ellipse[flag] = current;
+
+            repaint();
+        }
     }
 
     private int find(Point2D p) {
         int flag = 5;
-        for (int i = 0; i < numPoints; i++) {
+        for (int i = 0; i < countOfPoint; i++) {
             if (ellipse[i].contains(p)) {
                 flag = i;
                 return flag;
@@ -126,22 +146,12 @@ public class BezierCurve extends JPanel implements MouseListener, MouseMotionLis
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
+    public void mouseMoved(MouseEvent e) {
 
-        int flag = find(e.getPoint());
-        if (flag < 5) {
-            double x = e.getX();
-            double y = e.getY();
-            controlPoint[flag] = new Point2D.Double(x, y);
-            Ellipse2D.Double current = new Ellipse2D.Double(x - SIDE_LENGTH / 2, y - SIDE_LENGTH / 2, SIDE_LENGTH, SIDE_LENGTH);
-            ellipse[flag] = current;
-
-            repaint();
-        }
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
 
     }
 }
