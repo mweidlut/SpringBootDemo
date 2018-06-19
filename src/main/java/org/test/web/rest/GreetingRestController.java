@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import org.test.web.annotation.CheckMethod;
 import org.test.web.domain.User;
 import org.test.web.protobuf.CustomerProtos;
+import org.test.web.rabbitmq.Producer;
 import org.test.web.repo.CustomerRepository;
+import org.test.web.repo.UserRepository;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -28,6 +31,17 @@ public class GreetingRestController {
 
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private Producer producer;
+
+    @GET
+    @Path("/produce")
+    public String produce() {
+        producer.produce();
+        return "produce done!";
+    }
 
     @GET
     @Path("/hello")
@@ -44,6 +58,16 @@ public class GreetingRestController {
         user.setName("anna");
 
         return new Gson().toJson(user);
+    }
+
+    @GET
+    @Path("/users")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @CheckMethod
+    public String users() {
+        List<User> userList = userRepository.findAll();
+
+        return new Gson().toJson(userList);
     }
 
     @GET
