@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ReadImageInfo {
 
     public static void main(String[] args) {
-        File jpegFile = new File("C:\\Users\\Public\\Pictures\\Sample Pictures\\image-2.jpg");
+        File jpegFile = new File("C:\\Users\\Public\\Pictures\\Sample Pictures\\image-1.jpg");
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(jpegFile);
             for (Directory directory : metadata.getDirectories()) {
