@@ -18,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -46,6 +47,23 @@ public class GreetingRestController {
     @GET
     @Path("/hello")
     public String greeting() {
+        return "Hello World!";
+    }
+
+    @GET
+    @Path("/reflect")
+    public String reflect() {
+        try {
+            Method method = this.getClass().getMethod("user", null);
+            Object invoke = method.invoke(this, null); //反射不会被aop拦截
+
+            System.out.println("reflect...");
+
+            return invoke.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "Hello World!";
     }
 
