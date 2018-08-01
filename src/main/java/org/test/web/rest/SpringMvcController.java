@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.test.web.protobuf.CustomerProtos;
 import org.test.web.repo.CustomerRepository;
 
-/**
- * User: weimeng
- * Date: 2017/12/15 18:01
- */
+
 @RestController
 public class SpringMvcController {
 

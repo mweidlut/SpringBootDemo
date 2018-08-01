@@ -1,9 +1,6 @@
 package org.test.web.domain;
 
-/**
- * User: weimeng
- * Date: 2017/11/7 16:09
- */
+
 public abstract class AbstractUser {
 
     private String sex; // M/F

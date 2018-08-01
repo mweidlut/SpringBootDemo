@@ -1,7 +1,6 @@
 package org.test.web.protobuf;
 
 /**
- * User: weimeng
  * Date: 2018/7/11 9:56
  * https://www.cnblogs.com/liugh/p/7505533.html
  */
