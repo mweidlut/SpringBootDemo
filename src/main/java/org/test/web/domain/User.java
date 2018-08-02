@@ -33,7 +33,7 @@ public class User extends AbstractUser implements Serializable {
     private LocalDate birthday;
 
     @Column
-    private LocalDateTime createTime = LocalDateTime.now();
+    private LocalDateTime createTime; // = LocalDateTime.now();
 
     private transient List<User> child = new ArrayList<>();
 

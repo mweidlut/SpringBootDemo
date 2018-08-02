@@ -9,14 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.test.web.ApplicationConfig4Test;
 import org.test.web.domain.User;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Ignore
 @RunWith(SpringRunner.class)
@@ -48,4 +50,31 @@ public class UserRepositoryTest {
         logger.info("find users {} ", users);
     }
 
+
+    @Test
+    public void testFindByExample() {
+        userRepository.save(Arrays.asList(
+                new User("anna", "F", LocalDate.now()),
+                new User("anna2", "F", LocalDate.now()),
+                new User("mike", "M", LocalDate.now()),
+                new User("mike2", "M", LocalDate.now())));
+
+        userRepository.flush();
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.startsWith())
+                .withIgnorePaths("createTime", "birthday")
+                .withIgnoreNullValues();
+
+        User query = new User();
+        query.setName("mike");
+
+//        Example<User> userExample = Example.of(query);
+        Example<User> userExample = Example.of(query, matcher);
+
+        List<User> users = userRepository.findAll(userExample);
+
+        logger.info("find user size {} ", users.size());
+        logger.info("find user {} ", users);
+    }
 }
