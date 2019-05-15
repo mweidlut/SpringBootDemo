@@ -6,8 +6,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import jersey.repackaged.com.google.common.collect.ImmutableList;
-import jersey.repackaged.com.google.common.collect.ImmutableListMultimap;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,18 +20,7 @@ public class TestCase {
     private static Logger logger = LoggerFactory.getLogger(TestCase.class);
 
     @Test
-    public void testMultimap() {
-        ImmutableListMultimap.Builder<Integer, String> builder = ImmutableListMultimap.builder();
-        builder.put(1, "a").put(1, "b").put(2, "c");
-
-        ImmutableListMultimap<Integer, String> immutableListMultimap = builder.build();
-        ImmutableList<String> valueList = immutableListMultimap.get(1);
-
-        System.out.println(valueList.toString());
-    }
-
-    @Test
-    public void testInheritJson(){
+    public void testInheritJson() {
         User user = new User("Anna", "F", LocalDate.now().minusYears(20))
                 .children(new User("Mike", "M", LocalDate.now().minusYears(20)));
 
@@ -45,7 +32,7 @@ public class TestCase {
     }
 
     @Test
-    public void testByteBuffer(){
+    public void testByteBuffer() {
         String str = "abcde";
 
         //1. 分配一个指定大小的缓冲区
@@ -98,12 +85,12 @@ public class TestCase {
         System.out.println(buf.limit());
         System.out.println(buf.capacity());
 
-        System.out.println((char)buf.get());
+        System.out.println((char) buf.get());
 
     }
 
     @Test
-    public void testJsonDate(){
+    public void testJsonDate() {
         User user = new User("Anna", "F", LocalDate.now().minusYears(20));
 
         JsonSerializer<LocalDate> ser = new JsonSerializer<LocalDate>() {
