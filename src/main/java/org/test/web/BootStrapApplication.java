@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.test.web.batch.SpringBatchDemoBootstrap;
-import org.test.web.ufx.UFXBootstrap;
 
 import java.security.Security;
 
@@ -31,6 +30,10 @@ public class BootStrapApplication {
         SpringApplication.run(BootStrapApplication.class, args);
     }
 
+    @Bean
+    public SpringBatchDemoBootstrap batchBootstrap() {
+        return new SpringBatchDemoBootstrap();
+    }
 
     /*@Bean
     public ProtobufHttpMessageConverter protobufHttpMessageConverter() {
@@ -43,9 +46,5 @@ public class BootStrapApplication {
         return new UFXBootstrap();
     }*/
 
-    /*@Bean
-    public SpringBatchDemoBootstrap batchBootstrap(){
-        return new SpringBatchDemoBootstrap();
-    }*/
 
 }

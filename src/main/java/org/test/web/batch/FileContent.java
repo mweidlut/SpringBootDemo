@@ -4,7 +4,7 @@ package org.test.web.batch;
  * User: Thinkpad
  * Date: 2019/5/6 21:35
  */
-public class DeviceCommand {
+public class FileContent {
 
     private String id;
     private String status;

@@ -140,7 +140,11 @@
             <artifactId>guava</artifactId>
             <version>25.1-jre</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.linuxense</groupId>
+            <artifactId>javadbf</artifactId>
+            <version>0.4.0</version>
+        </dependency>
         <!--<dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>

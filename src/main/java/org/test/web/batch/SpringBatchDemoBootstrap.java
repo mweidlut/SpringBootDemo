@@ -33,25 +33,25 @@ public class SpringBatchDemoBootstrap implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
 
         // 创建reader
-        FlatFileItemReader<DeviceCommand> flatFileItemReader = new FlatFileItemReader<>();
-        flatFileItemReader.setResource(new FileSystemResource("src/main/resources/batch-data.csv"));
-        flatFileItemReader.setLineMapper(new HelloLineMapper());
+        FlatFileItemReader<FileContent> fileReader = new FlatFileItemReader<>();
+        fileReader.setResource(new FileSystemResource("src/main/resources/batch-data.csv"));
+        fileReader.setLineMapper(new SimpleLineMapper());
 
         // 创建processor
-        HelloItemProcessor helloItemProcessor = new HelloItemProcessor();
+        SimpleItemProcessor itemProcessor = new SimpleItemProcessor();
 
         // 创建writer
-        FlatFileItemWriter<DeviceCommand> flatFileItemWriter = new FlatFileItemWriter<>();
-        flatFileItemWriter.setResource(new FileSystemResource("src/main/resources/batch-data2.csv"));
-        flatFileItemWriter.setLineAggregator(new HelloLineAggregator());
+        FlatFileItemWriter<FileContent> fileWriter = new FlatFileItemWriter<>();
+        fileWriter.setResource(new FileSystemResource("src/main/resources/batch-data2.csv"));
+        fileWriter.setLineAggregator(new SimpleLineAggregator());
 
         // 创建Step
         StepBuilderFactory stepBuilderFactory = new StepBuilderFactory(jobRepository, transactionManager);
         Step step = stepBuilderFactory.get("step")
-                .<DeviceCommand, DeviceCommand>chunk(1)
-                .reader(flatFileItemReader)       // 读操作
-                .processor(helloItemProcessor)    // 处理操作
-                .writer(flatFileItemWriter)       // 写操作
+                .<FileContent, FileContent>chunk(1)
+                .reader(fileReader)       // 读操作
+                .processor(itemProcessor) // 处理操作
+                .writer(fileWriter)       // 写操作
                 .build();
 
         // 创建Job

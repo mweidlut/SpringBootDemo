@@ -1,0 +1,12 @@
+POST http://10.139.60.175:9015/test
+Content-Type: application/json
+Content-Transfer-Encoding: UTF-8
+Access-Control-Request-Headers: "home":"123"
+
+{
+  "appId": "123456",
+  "version": "1.0",
+  "signType": "RSA"
+}
+
+###
