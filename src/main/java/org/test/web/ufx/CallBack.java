@@ -13,7 +13,6 @@ public class CallBack implements ICallBackMethod{
 	private Logger logger = Logger.getLogger("UFXUtil");
 	@Override
 	public void execute(IEvent arg0, ClientSocket arg1) {
-		// TODO Auto-generated method stub
 		//先判断返回值
 		logger.info("收到异步回调消息");
 		if(arg0.getReturnCode() !=  EventReturnCode.I_OK){ //返回错误

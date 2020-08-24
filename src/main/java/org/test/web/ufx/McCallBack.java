@@ -12,7 +12,6 @@ public class McCallBack  implements ISubCallback{
 
     @Override
     public void OnReceived(String topicName, IEvent event) {
-        // TODO Auto-generated method stub
     	logger.info("收到消息主推");
     	g_iCount++;
     	//if(g_iCount%100 == 0)
@@ -24,8 +23,7 @@ public class McCallBack  implements ISubCallback{
 
     @Override
     public void OnRecvTickMsg(MCSubscribeParameter param,String tickMsgInfo) {
-        // TODO Auto-generated method stub
-        
+
     }
 
 }

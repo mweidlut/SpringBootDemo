@@ -62,7 +62,7 @@ public class BezierCurve extends JPanel implements MouseListener, MouseMotionLis
         }
 
         if (countOfPoint == 4) {
-            g2d.setColor(Color.RED);
+            g2d.setColor(Color.BLUE);
 
             double x, y;
             for (double k = delta; k <= 1 + delta; k += delta) {
