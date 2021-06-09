@@ -22,6 +22,8 @@ public class CustomerService {
 
     @PostConstruct
     public void init() {
+        repository.deleteAll();
+
         // save a few customers
         repository.save(new Customer("Jack", "11"));
         repository.save(new Customer("Chloe", "22"));
@@ -47,7 +49,7 @@ public class CustomerService {
         // 增加代理
         customerService.findDb(firstName);
 
-        log.info("after update:{}", repository.findByFirstName(firstName));
+        log.info("before update:{}", repository.findByFirstName(firstName));
     }
 
     @Transactional(value = Transactional.TxType.REQUIRES_NEW)
