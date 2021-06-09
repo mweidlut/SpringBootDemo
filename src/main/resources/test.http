@@ -1,0 +1,8 @@
+POST http://localhost:8082/update
+Content-Type: application/json
+Content-Transfer-Encoding: UTF-8
+
+{
+  "firstName": "Jack",
+  "age": "100"
+}
